@@ -45,7 +45,7 @@ if __name__ == '__main__':
 
     # The number of facial landmarks the model should output. By default the
     # marks are in 2D space.
-    num_marks = 68
+    num_marks = 98
 
     # Create the Model
     model = build_landmark_model(input_shape=input_shape,
