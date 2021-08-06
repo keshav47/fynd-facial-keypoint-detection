@@ -41,6 +41,6 @@ def predict(image_path):
 
 
 if __name__ == "__main__":
-    detector_face = Detector('/content/cnn-facial-landmark/assets/face_model')
-    cnn_model = tf.keras.models.load_model("/content/cnn-facial-landmark/exported")
-    predict("/content/cnn-facial-landmark/test.jpg",detector_face,cnn_model)
+    detector_face = Detector('assets/face_model')
+    cnn_model = tf.keras.models.load_model("exported")
+    predict("test.jpg",detector_face,cnn_model)
