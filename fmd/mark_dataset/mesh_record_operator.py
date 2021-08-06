@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-from tfrecord_operator import (RecordOperator, bytes_feature, float_feature,
+from fmd.mark_dataset.tfrecord_operator import (RecordOperator, bytes_feature, float_feature,
                                int64_feature, to_strings)
 
 
