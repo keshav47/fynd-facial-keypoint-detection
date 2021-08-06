@@ -1,5 +1,3 @@
-from face_detector.detector import Detector
-import tensorflow as tf
 import cv2
 from google.colab.patches import cv2_imshow
 from fmd.mark_dataset.util import draw_marks
@@ -38,9 +36,3 @@ def predict(image_path,detector_face,cnn_model):
         output_points = [[(out[i]),out[i+1]] for i in range(0,out.shape[0],2)]
         draw_marks(face_image,output_points)
         cv2_imshow(cv2.cvtColor(face_image, cv2.COLOR_BGR2RGB))
-
-
-if __name__ == "__main__":
-    detector_face = Detector('assets/face_model')
-    cnn_model = tf.keras.models.load_model("exported")
-    predict("test.jpg",detector_face,cnn_model)
