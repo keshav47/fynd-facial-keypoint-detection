@@ -5,7 +5,7 @@ from google.colab.patches import cv2_imshow
 from fmd.mark_dataset.util import draw_marks
 import numpy as np
 
-def predict(image_path):
+def predict(image_path,detector_face,cnn_model):
   image = cv2.imread(image_path)
   _image = detector_face.preprocess(image)
   threshold = 0.7
