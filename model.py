@@ -101,7 +101,8 @@ def build_landmark_model(input_shape, output_size):
     inputs = keras.Input(shape=input_shape, name="image_input")
 
     # Preprocess the inputs.
-    x = preprocess(inputs)
+    # x = preprocess(inputs)
+    x = inputs
 
     # |== Layer 1 ==|
     x = conv_1(x)
