@@ -91,7 +91,7 @@ def build_landmark_model(input_shape, output_size):
     bn_6 = keras.layers.BatchNormalization()
     bn_7 = keras.layers.BatchNormalization()
     bn_8 = keras.layers.BatchNormalization()
-    bn_9 = keras.layers.BatchNormalization()
+    # bn_9 = keras.layers.BatchNormalization()
 
 
     # Flatten layers.
