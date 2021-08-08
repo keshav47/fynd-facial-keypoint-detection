@@ -18,7 +18,7 @@ def build_landmark_model(input_shape, output_size):
     # The model is composed of multiple layers.
 
     # Preprocessing layers.
-    # preprocess = keras.layers.experimental.preprocessing.Normalization()
+    preprocess = keras.layers.experimental.preprocessing.Normalization()
 
     # Convolutional layers.
     conv_1 = keras.layers.Conv2D(filters=32,
@@ -91,7 +91,7 @@ def build_landmark_model(input_shape, output_size):
     bn_6 = keras.layers.BatchNormalization()
     bn_7 = keras.layers.BatchNormalization()
     bn_8 = keras.layers.BatchNormalization()
-    # bn_9 = keras.layers.BatchNormalization()
+    bn_9 = keras.layers.BatchNormalization()
 
 
     # Flatten layers.
@@ -101,8 +101,7 @@ def build_landmark_model(input_shape, output_size):
     inputs = keras.Input(shape=input_shape, name="image_input")
 
     # Preprocess the inputs.
-    # x = preprocess(inputs)
-    x = inputs
+    x = preprocess(inputs)
 
     # |== Layer 1 ==|
     x = conv_1(x)
@@ -137,7 +136,7 @@ def build_landmark_model(input_shape, output_size):
     # |== Layer 6 ==|
     x = flatten_1(x)
     x = dense_1(x)
-    # x = bn_9(x)
+    x = bn_9(x)
     outputs = dense_2(x)
 
     # Return the model
