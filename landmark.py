@@ -9,6 +9,7 @@ from tensorflow import keras
 
 from dataset import get_parsed_dataset
 from model import build_landmark_model
+import tensorflow_model_optimization as tfmot
 
 # Introduce arguments parser to give user the flexibility to tune the process.
 parser = argparse.ArgumentParser()
@@ -24,6 +25,8 @@ parser.add_argument('--export_only', default=False, type=bool,
                     help='Save the model without training and evaluation.')
 parser.add_argument('--eval_only', default=False, type=bool,
                     help='Do evaluation without training.')
+parser.add_argument("--quantization", default=False, type=bool,
+                    help="Excute quantization aware training.")
 args = parser.parse_args()
 
 
@@ -76,6 +79,11 @@ if __name__ == '__main__':
         model.save(export_dir, include_optimizer=False)
         print("Model saved at: {}".format(export_dir))
         quit()
+
+    if args.quantization:
+        print("Initializing Quantization Aware Training")
+        quantize_model = tfmot.quantization.keras.quantize_model
+        model = quantize_model(model)
 
     # Finally, it's time to train the model.
     model.compile(optimizer=keras.optimizers.Adam(learning_rate=0.001),
