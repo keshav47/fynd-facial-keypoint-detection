@@ -82,8 +82,19 @@ if __name__ == '__main__':
 
     if args.quantization:
         print("Initializing Quantization Aware Training")
-        quantize_model = tfmot.quantization.keras.quantize_model
-        model = quantize_model(model)
+        def apply_quantization_to_dense(layer):
+            if isinstance(layer, tf.keras.layers.Dense):
+                return tfmot.quantization.keras.quantize_annotate_layer(layer)
+
+            if isinstance(layer, tf.keras.layers.Conv2D):
+                return tfmot.quantization.keras.quantize_annotate_layer(layer)
+
+            if isinstance(layer, tf.keras.layers.MaxPool2D):
+                return tfmot.quantization.keras.quantize_annotate_layer(layer)
+
+            return layer
+        quantize_model = tf.keras.models.clone_model(model,clone_function=apply_quantization_to_dense,)
+        model = tfmot.quantization.keras.quantize_apply(quantize_model)
 
     # Finally, it's time to train the model.
     model.compile(optimizer=keras.optimizers.Adam(learning_rate=0.001),

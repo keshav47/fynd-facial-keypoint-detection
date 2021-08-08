@@ -136,7 +136,7 @@ def build_landmark_model(input_shape, output_size):
     # |== Layer 6 ==|
     x = flatten_1(x)
     x = dense_1(x)
-    # x = bn_9(x)
+    x = bn_9(x)
     outputs = dense_2(x)
 
     # Return the model
