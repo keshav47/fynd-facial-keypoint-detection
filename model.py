@@ -18,7 +18,7 @@ def build_landmark_model(input_shape, output_size):
     # The model is composed of multiple layers.
 
     # Preprocessing layers.
-    preprocess = keras.layers.experimental.preprocessing.Normalization()
+    # preprocess = keras.layers.experimental.preprocessing.Normalization()
 
     # Convolutional layers.
     conv_1 = keras.layers.Conv2D(filters=32,
