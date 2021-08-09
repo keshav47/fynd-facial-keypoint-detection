@@ -69,19 +69,6 @@ if __name__ == '__main__':
     else:
         print("Checkpoint not found. Model weights will be initialized randomly.")
 
-    # Sometimes the user only want to save the model. Skip training in this case.
-    if args.export_only:
-        if not tf.io.gfile.exists(export_dir):
-            tf.io.gfile.mkdir(export_dir)
-
-        if latest_checkpoint is None:
-            print("Warning: Model not restored from any checkpoint.")
-
-        print("Saving model to {} ...".format(export_dir))
-        model.save(export_dir, include_optimizer=False)
-        print("Model saved at: {}".format(export_dir))
-        quit()
-
     if args.quantization:
         print("Initializing Quantization Aware Training")
         def apply_quantization_to_dense(layer):
@@ -97,6 +84,21 @@ if __name__ == '__main__':
             return layer
         quantize_model = tf.keras.models.clone_model(model,clone_function=apply_quantization_to_dense)
         model = tfmot.quantization.keras.quantize_apply(quantize_model)
+
+    # Sometimes the user only want to save the model. Skip training in this case.
+    if args.export_only:
+        if not tf.io.gfile.exists(export_dir):
+            tf.io.gfile.mkdir(export_dir)
+
+        if latest_checkpoint is None:
+            print("Warning: Model not restored from any checkpoint.")
+
+        print("Saving model to {} ...".format(export_dir))
+        model.save(export_dir, include_optimizer=False)
+        print("Model saved at: {}".format(export_dir))
+        quit()
+
+
 
     # Finally, it's time to train the model.
     model.compile(optimizer=keras.optimizers.Adam(learning_rate=args.lr),
