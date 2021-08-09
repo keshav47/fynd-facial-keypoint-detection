@@ -37,7 +37,7 @@ Download the following files and place it inside the `./wflw_data` folder:
 1) [WFLW_annotations.tar.gz](https://drive.google.com/file/d/1-1NqSgYx55cZCUYWGDDiiTGeT6_BN57S/view?usp=sharing)
 2) [WFLW_images.tar.gz](https://drive.google.com/file/d/1-1UlzCvhCYOr1bpIWZ9YeQExKN-igXgS/view?usp=sharing) 
 
-## Train & evaluate
+## Train & Finetune
 
 The following command shows how to train the model for 10 epochs.
 
@@ -48,6 +48,18 @@ python3 landmark.py \
     --val_record=validation.record \
     --batch_size=32 \
     --epochs=10
+```
+
+The following command shows how to finetune the model for 10 epochs.
+
+```bash
+# From the repo's root directory
+python3 landmark.py \
+    --train_record=train.record \
+    --val_record=validation.record \
+    --batch_size=32 \
+    --epochs=10 \
+    --quantization=True
 ```
 
 
