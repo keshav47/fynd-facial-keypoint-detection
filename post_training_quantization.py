@@ -9,7 +9,7 @@ from fmd.mark_dataset.dataset import MarkDataset
 from dataset import get_parsed_dataset
 
 def representative_dataset_gen():
-    wflw_dir = "./wflw_data"
+    wflw_dir = "./wflw_data/"
     ds_wflw = fmd.wflw.WFLW(False, "wflw_test")
     ds_wflw.populate_dataset(wflw_dir)
 
