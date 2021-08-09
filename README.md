@@ -99,4 +99,4 @@ Tensorflow's [TfLite converter](https://www.tensorflow.org/model_optimization/gu
 
 | PTQ        | MSE                                                                                                         | Speed | 
 | ----------- | -------------------------------------------------------------------------------------------------------------- | --------- |
-| DynamicRangeQuantization        |                                   | 11.48      |  141.92s
+| DynamicRangeQuantization        |                     11.48      |  141.92s |
