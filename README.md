@@ -1,7 +1,7 @@
 
 # fynd-facial-keypoint-detection
 
-Facial Keypoint detection, trained with CNN model on WFLW Facial Keypoint Dataset and finetuned with Quantization Aware Training. The repo includes Post Training Quantization with Tensorflow's TfLite Converter and comparison with various PTQ techniques.
+Facial Keypoint detection, trained with CNN model on WFLW Facial Keypoint Dataset and finetuned with Quantization Aware Training. The repo includes Post Training Quantization with Tensorflow's TfLite Converter and comparison with various PTQ techniques. Code in this repo is inspired from [yinguobing/facial-landmark-detection-hrnet](https://github.com/yinguobing/facial-landmark-detection-hrnet) and [cnn-facial-landmark](https://github.com/yinguobing/cnn-facial-landmark), and quantization concepts were covered from [paper](https://arxiv.org/pdf/2106.08295.pdf)
 
 Some of the results: ![result](test_images/result.png).
 ## Getting Started
@@ -97,6 +97,27 @@ quantized_predict.predict("./test_images/test_3.jpg")
 Tensorflow's [TfLite converter](https://www.tensorflow.org/model_optimization/guide/quantization/training_example#create_quantized_model_for_tflite_backend) is used to convert '.pb' model to '.tflite'.
 
 
+Post Training Quantization on Trained Model w/o QAT
+
 | PTQ        | MSE                                                                                                         | Speed | 
 | ----------- | -------------------------------------------------------------------------------------------------------------- | --------- |
-| DynamicRangeQuantization        |                     11.48      |  141.92s |
+| DynamicRangeQuantization | 11.48 | 141.92s |
+| IntegerWithFloatFallback | 125.15491539955138 | 141.92030382156372s |
+| IntegerOnly | 11.484367706775664 | 84.51638507843018s |
+| FP16 | 11.429764971733093 | 2.5578582286834717s |
+| 16x8 | 11.484367706775664 | 83.58727502822876s |
+
+
+Post Training Quantization on Trained Model with QAT
+| PTQ        | MSE                                                                                                         | Speed | 
+| ----------- | -------------------------------------------------------------------------------------------------------------- | --------- |
+| DynamicRangeQuantization | 7.693058376312256 | 2.1737828254699707s |
+| IntegerWithFloatFallback | 134.4890119934082 | 141.91820645332336s |
+| IntegerOnly | 7.693058376312256 | 2.1956045627593994s |
+| FP16 | 7.693058376312256 | 2.5590295791625977s |
+| 16x8 | 7.693058376312256 | 2.1480464935302734s |
+
+
+Clear difference in MSE between model trained with QAT and without QAT clearly proves our hypothesis that QAT generates more robuts weights whose performance doesn't decrease post quantization.   
+
+## SOURCES
