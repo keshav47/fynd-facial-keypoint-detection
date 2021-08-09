@@ -45,7 +45,7 @@ def quantize(saved_model, mode=None, representative_dataset=None):
     Returns:
         a tflite model quantized.
     """
-    converter = tf.lite.TFLiteConverter.from_saved_model("./exported")
+    converter = tf.lite.TFLiteConverter.from_saved_model(saved_model)
 
     # By default, do Dynamic Range Quantization.
     converter.optimizations = [tf.lite.Optimize.DEFAULT]
