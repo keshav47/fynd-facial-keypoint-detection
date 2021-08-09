@@ -102,22 +102,18 @@ Post Training Quantization on Trained Model w/o QAT
 | PTQ        | MSE                                                                                                         | Speed | 
 | ----------- | -------------------------------------------------------------------------------------------------------------- | --------- |
 | DynamicRangeQuantization | 11.48 | 141.92s |
-| IntegerWithFloatFallback | 125.15491539955138 | 141.92030382156372s |
-| IntegerOnly | 11.484367706775664 | 84.51638507843018s |
-| FP16 | 11.429764971733093 | 2.5578582286834717s |
-| 16x8 | 11.484367706775664 | 83.58727502822876s |
+| IntegerWithFloatFallback | 125.15 | 141.92s |
+| IntegerOnly | 11.48 | 84.51s |
+| 16x8 | 11.48s | 83.58s |
 
 
 Post Training Quantization on Trained Model with QAT
 | PTQ        | MSE                                                                                                         | Speed | 
 | ----------- | -------------------------------------------------------------------------------------------------------------- | --------- |
-| DynamicRangeQuantization | 7.693058376312256 | 2.1737828254699707s |
-| IntegerWithFloatFallback | 134.4890119934082 | 141.91820645332336s |
-| IntegerOnly | 7.693058376312256 | 2.1956045627593994s |
-| FP16 | 7.693058376312256 | 2.5590295791625977s |
-| 16x8 | 7.693058376312256 | 2.1480464935302734s |
+| DynamicRangeQuantization | 7.69 | 2.17s |
+| IntegerWithFloatFallback | 134.48 | 141.91s |
+| IntegerOnly | 7.69 | 2.19s |
+| 16x8 | 7.69 | 2.14s |
 
 
 Clear difference in MSE between model trained with QAT and without QAT clearly proves our hypothesis that QAT generates more robuts weights whose performance doesn't decrease post quantization.   
-
-## SOURCES
