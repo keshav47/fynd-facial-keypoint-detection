@@ -52,6 +52,7 @@ if __name__ == '__main__':
     # Besides checkpoint, `saved_model` is another way to save the model for
     # inference or optimization.
     export_dir = "exported"
+    export_quantized_dir = "exported_quantized"
 
     # The log directory for tensorboard.
     log_dir = "logs"
@@ -83,8 +84,8 @@ if __name__ == '__main__':
     # Sometimes the user only want to save the model. Skip training in this case.
     if args.export_only and args.quantization:
         latest_checkpoint = tf.train.latest_checkpoint(quantized_checkpoints_dir)
-        if not tf.io.gfile.exists(export_dir):
-            tf.io.gfile.mkdir(export_dir)
+        if not tf.io.gfile.exists(export_quantized_dir):
+            tf.io.gfile.mkdir(export_quantized_dir)
 
         quantize_model = tf.keras.models.clone_model(model,clone_function=apply_quantization_to_dense)
         model = tfmot.quantization.keras.quantize_apply(quantize_model)
@@ -93,9 +94,9 @@ if __name__ == '__main__':
             print("Warning: Model not restored from any checkpoint.")
         else:
             model.load_weights(latest_checkpoint)
-            print("Saving model to {} ...".format(export_dir))
-            model.save(export_dir, include_optimizer=False)
-            print("Model saved at: {}".format(export_dir))
+            print("Saving model to {} ...".format(export_quantized_dir))
+            model.save(export_quantized_dir, include_optimizer=False)
+            print("Model saved at: {}".format(export_quantized_dir))
         quit()
 
     if latest_checkpoint:
