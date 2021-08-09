@@ -9,10 +9,7 @@ Here is a sample png showing the detection result.
 
 
 ## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
-### Prerequisites
+### Quickstart
 Check out the quickstart notebook on colab for setting up environment, training and inferencing.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1GYu-SvQYqhCd2CWj64J6kDuMV9_xep27?usp=sharing)
@@ -22,12 +19,11 @@ Check out the quickstart notebook on colab for setting up environment, training 
 Just git clone this repo and you are good to go.
 
 ```bash
-# From your favorite development directory
 git clone https://github.com/keshav47/cnn-facial-landmark.git
 ```
 
 ## Prparing Dataset
-Used WFLW Facial Keypint Dataset
+Model is trained on WFLW Facial Keypint Dataset
 
 | Name        | Author                                                                                                         | Published | #Marks | #Samples |
 | ----------- | -------------------------------------------------------------------------------------------------------------- | --------- | ------ | -------- |
@@ -77,6 +73,6 @@ TensorFlow's [SavedModel](https://www.tensorflow.org/guide/saved_model) is recom
 python3 landmark.py --export_only=True
 ```
 
-###
+### TfLite Conversion
 
 Tensorflow's [TfLite converter](https://www.tensorflow.org/model_optimization/guide/quantization/training_example#create_quantized_model_for_tflite_backend) is used to convert '.pb' model to '.tflite'.
