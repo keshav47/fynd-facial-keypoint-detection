@@ -179,6 +179,7 @@ if __name__ == "__main__":
 
     # The model to be quantized.
     saved_model = args.export_model
+    
     # Dynamic range quantization
     mode = MODE.copy()
     mode.update({"DynamicRangeQuantization": True})
