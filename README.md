@@ -97,10 +97,10 @@ quantized_predict.predict("./test_images/test_3.jpg")
 Tensorflow's [TfLite converter](https://www.tensorflow.org/model_optimization/guide/quantization/training_example#create_quantized_model_for_tflite_backend) is used to convert '.pb' model to '.tflite'.
 
 
-Post Training Quantization on Trained Model w/o QAT
+Post Training Quantization on Trained Model w/o QAT (SOMETHING WRONG WITH TIMINGS)
 
-| PTQ        | MSE                                                                                                         | Speed | 
-| ----------- | -------------------------------------------------------------------------------------------------------------- | --------- |
+| PTQ | MSE/Per 100 instances | Speed/Per 100 instances | 
+| --- | --------------------- | ----------------------- |
 | DynamicRangeQuantization | 11.48 | 141.92s |
 | IntegerWithFloatFallback | 125.15 | 141.92s |
 | IntegerOnly | 11.48 | 84.51s |
@@ -108,12 +108,19 @@ Post Training Quantization on Trained Model w/o QAT
 
 
 Post Training Quantization on Trained Model with QAT
-| PTQ        | MSE                                                                                                         | Speed | 
-| ----------- | -------------------------------------------------------------------------------------------------------------- | --------- |
+| PTQ | MSE/Per 100 instances | Speed/Per 100 instances | 
+| --- | --------------------- | ----------------------- |
 | DynamicRangeQuantization | 7.69 | 2.17s |
 | IntegerWithFloatFallback | 134.48 | 141.91s |
 | IntegerOnly | 7.69 | 2.19s |
 | 16x8 | 7.69 | 2.14s |
+
+
+Inferencing on model with QAT without quantization
+| Model | MSE/Per 100 instances | Speed/Per 100 instances |
+| --- | --------------------- | ----------------------- |
+| Model with QAT | 7.43 | 7.79s |
+| Model w/o QAT | 11.42 | 10.3s |
 
 
 Clear difference in MSE between model trained with QAT and without QAT clearly proves our hypothesis that QAT generates more robuts weights whose performance doesn't decrease post quantization.   
