@@ -8,7 +8,6 @@ import tensorflow as tf
 import fmd
 from fmd.mark_dataset.dataset import MarkDataset
 from dataset import get_parsed_dataset
-from tqdm import tqdm
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--export_model', default='./exported', type=str,
@@ -148,7 +147,7 @@ def inference(tflite_model):
   result_mse = []
   start = time.time()
   count = 0
-  for input_image,output_val in tqdm(dataset_val):
+  for input_image,output_val in dataset_val:
     interpreter.set_tensor(input_index, input_image)
     # Run inference.
     interpreter.invoke()
