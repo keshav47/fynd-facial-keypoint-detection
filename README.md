@@ -33,9 +33,9 @@ Used WFLW Facial Keypint Dataset
 | ----------- | -------------------------------------------------------------------------------------------------------------- | --------- | ------ | -------- |
 | WFLW        | [Tsinghua National Laboratory](https://wywu.github.io/projects/LAB/WFLW.html)                                  | 2018      | 98     | 10000    |
 
-Download the following files and place it inside the `./wflw_data` folder:
-[WFLW_annotations.tar.gz](https://drive.google.com/file/d/1-1NqSgYx55cZCUYWGDDiiTGeT6_BN57S/view?usp=sharing)
-[WFLW_images.tar.gz](https://drive.google.com/file/d/1-1UlzCvhCYOr1bpIWZ9YeQExKN-igXgS/view?usp=sharing)
+Download the following files and place it inside the `./wflw_data` folder: \
+1) [WFLW_annotations.tar.gz](https://drive.google.com/file/d/1-1NqSgYx55cZCUYWGDDiiTGeT6_BN57S/view?usp=sharing) \ 
+2) [WFLW_images.tar.gz](https://drive.google.com/file/d/1-1UlzCvhCYOr1bpIWZ9YeQExKN-igXgS/view?usp=sharing) 
 
 ## Train & evaluate
 
