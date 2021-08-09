@@ -1,9 +1,9 @@
 
 # fynd-facial-keypoint-detection
 
-Facial Keypoint detection, trained with CNN model on WFLW Facial Keypoint Dataset and finetuned with Quantization Aware Training. The repo includes Post Training Quantization with Tensorflow's TfLite Converter and comparison with various PTQ techniques. Code in this repo is inspired from [yinguobing/facial-landmark-detection-hrnet](https://github.com/yinguobing/facial-landmark-detection-hrnet) and [cnn-facial-landmark](https://github.com/yinguobing/cnn-facial-landmark), and quantization concepts were covered from [paper](https://arxiv.org/pdf/2106.08295.pdf)
+Facial Keypoint detection, trained with CNN model on WFLW Facial Keypoint Dataset and finetuned with Quantization Aware Training. The repo includes Post Training Quantization with Tensorflow's TfLite Converter and comparison with various PTQ techniques. Code in this repo is inspired from [yinguobing/facial-landmark-detection-hrnet](https://github.com/yinguobing/facial-landmark-detection-hrnet) and [cnn-facial-landmark](https://github.com/yinguobing/cnn-facial-landmark), and quantization concepts were covered from [paper](https://arxiv.org/pdf/2106.08295.pdf.)
 
-Some of the results: ![result](test_images/result.png).
+Some of the results: ![result](test_images/result.png)
 ## Getting Started
 ### Quickstart
 Check out the colab notebook for setting up environment, training, prediction inferencing etc.
@@ -29,7 +29,7 @@ Download the following files and place it inside the `./wflw_data` folder:
 1) [WFLW_annotations.tar.gz](https://drive.google.com/file/d/1-1NqSgYx55cZCUYWGDDiiTGeT6_BN57S/view?usp=sharing)
 2) [WFLW_images.tar.gz](https://drive.google.com/file/d/1-1UlzCvhCYOr1bpIWZ9YeQExKN-igXgS/view?usp=sharing) 
 
-The following command creates train and test records in tfrecords folder.
+The following command creates train and test records in `./tfrecords` folder.
 ```bash
 # From the repo's root directory
 !python generate_mesh_dataset.py
