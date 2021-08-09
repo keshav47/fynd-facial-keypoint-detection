@@ -18,6 +18,7 @@ Check out the quickstart notebook on colab for setting up environment, training 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1GYu-SvQYqhCd2CWj64J6kDuMV9_xep27?usp=sharing]
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/weiji14/deepbedmap/]
 
+[<img src="http://www.google.com.au/images/nav_logo7.png">](http://google.com.au/)
 ### Installing
 
 Just git clone this repo and you are good to go.
