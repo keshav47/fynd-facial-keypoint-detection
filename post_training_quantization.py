@@ -148,6 +148,8 @@ def inference(tflite_model):
   start = time.time()
   for input_image,output_val in dataset_val:
     interpreter.set_tensor(input_index, input_image)
+    # Run inference.
+    interpreter.invoke()
     output = interpreter.tensor(output_index)
     result_mse.append(mse(np.array(output_val), output()).numpy())
 
