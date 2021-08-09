@@ -1,16 +1,11 @@
 
 # fynd-facial-keypoint-detection
 
-Facial Keypoint detection, trained with Simple CNN with Quantization Aware Training.
-
-Here is a sample png showing the detection result.
-
-![](doc/demo01.gif)
-
+Facial Keypoint detection, trained with CNN model on WFLW Facial Keypoint Dataset and finetuned with Quantization Aware Training. The repo includes Post Training Quantization with Tensorflow's TfLite Converter and comparison with various PTQ techniques.
 
 ## Getting Started
 ### Quickstart
-Check out the quickstart notebook on colab for setting up environment, training and inferencing.
+Check out the colab notebook for setting up environment, training, prediction inferencing etc.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1GYu-SvQYqhCd2CWj64J6kDuMV9_xep27?usp=sharing)
 
@@ -23,7 +18,7 @@ git clone https://github.com/keshav47/cnn-facial-landmark.git
 ```
 
 ## Prparing Dataset
-Model is trained on WFLW Facial Keypint Dataset
+Model is trained on WFLW Facial Keypoint Dataset
 
 | Name        | Author                                                                                                         | Published | #Marks | #Samples |
 | ----------- | -------------------------------------------------------------------------------------------------------------- | --------- | ------ | -------- |
