@@ -158,6 +158,7 @@ if __name__ == "__main__":
     dataset_val = get_parsed_dataset(record_file="/content/fynd-facial-keypoint-detection/tfrecord/test_wflw.record",
                                         batch_size=1,
                                         shuffle=False)
+    mse = tf.keras.losses.MeanSquaredError()
     # The directory to save quantized models.
     export_dir = "./tflite_optimized"
 
@@ -170,31 +171,35 @@ if __name__ == "__main__":
     mode = MODE.copy()
     mode.update({"DynamicRangeQuantization": True})
     tflite_model = quantize(saved_model, mode)
-    inference(tflite_model)
+    print(f"Mean Square Error for DynamicRangeQuantization is {inference(tflite_model)[0]}, speed of inference {inference(tflite_model)[1]}s")
 
     
     mode = MODE.copy()
     mode.update({"IntegerWithFloatFallback": True})
     tflite_model = quantize(saved_model, mode, representative_dataset_gen)
     open("./tflite_optimized/quant_int_fp_fallback.tflite", "wb").write(tflite_model)
-    inference(tflite_model)
+    print(f"Mean Square Error for IntegerWithFloatFallback is {inference(tflite_model)[0]}, speed of inference {inference(tflite_model)[1]}s")
+
 
     mode = MODE.copy()
     mode.update({"IntegerOnly": True})
     tflite_model = quantize(saved_model, mode,  representative_dataset_gen)
     open("./tflite_optimized/quant_int_only.tflite", "wb").write(tflite_model)
-    inference(tflite_model)
+    print(f"Mean Square Error for IntegerOnly is {inference(tflite_model)[0]}, speed of inference {inference(tflite_model)[1]}s")
+    
 
     # Float16 quantization
     mode = MODE.copy()
     mode.update({"FP16": True})
     tflite_model = quantize(saved_model, mode)
     open("./tflite_optimized/quant_fp16.tflite", "wb").write(tflite_model)
-    inference(tflite_model)
+    print(f"Mean Square Error for FP16 is {inference(tflite_model)[0]}, speed of inference {inference(tflite_model)[1]}s")
+    
 
     # 16x8 quantization
     mode = MODE.copy()
     mode.update({"16x8": True})
     tflite_model = quantize(saved_model, mode)
     open("./tflite_optimized/quant_16x8.tflite", "wb").write(tflite_model)
-    inference(tflite_model)
+    print(f"Mean Square Error for 16x8 is {inference(tflite_model)[0]}, speed of inference {inference(tflite_model)[1]}s")
+    
