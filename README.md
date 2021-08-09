@@ -3,7 +3,7 @@
 
 Facial Keypoint detection, trained with CNN model on WFLW Facial Keypoint Dataset and finetuned with Quantization Aware Training. The repo includes Post Training Quantization with Tensorflow's TfLite Converter and comparison with various PTQ techniques.
 
-Some of the results: ![result](test_images/result.png).
+Some of the results: ![result](test_images/result.png =250x250).
 ## Getting Started
 ### Quickstart
 Check out the colab notebook for setting up environment, training, prediction inferencing etc.
