@@ -21,6 +21,8 @@ parser.add_argument('--epochs', default=1, type=int,
                     help='epochs for training')
 parser.add_argument('--batch_size', default=16, type=int,
                     help='training batch size')
+parser.add_argument('--lr', default=0.001, type=float,
+                    help='Learning rate')
 parser.add_argument('--export_only', default=False, type=bool,
                     help='Save the model without training and evaluation.')
 parser.add_argument('--eval_only', default=False, type=bool,
@@ -97,7 +99,7 @@ if __name__ == '__main__':
         model = tfmot.quantization.keras.quantize_apply(quantize_model)
 
     # Finally, it's time to train the model.
-    model.compile(optimizer=keras.optimizers.Adam(learning_rate=0.001),
+    model.compile(optimizer=keras.optimizers.Adam(learning_rate=args.lr),
                   loss=keras.losses.mean_squared_error)
 
     # Construct a dataset for evaluation.
