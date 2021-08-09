@@ -93,7 +93,7 @@ if __name__ == '__main__':
                 return tfmot.quantization.keras.quantize_annotate_layer(layer)
 
             return layer
-        quantize_model = tf.keras.models.clone_model(model,clone_function=apply_quantization_to_dense,)
+        quantize_model = tf.keras.models.clone_model(model,clone_function=apply_quantization_to_dense)
         model = tfmot.quantization.keras.quantize_apply(quantize_model)
 
     # Finally, it's time to train the model.
