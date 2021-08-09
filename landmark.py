@@ -31,6 +31,17 @@ parser.add_argument("--quantization", default=False, type=bool,
                     help="Excute quantization aware training.")
 args = parser.parse_args()
 
+def apply_quantization_to_dense(layer):
+    if isinstance(layer, tf.keras.layers.Dense):
+        return tfmot.quantization.keras.quantize_annotate_layer(layer)
+
+    if isinstance(layer, tf.keras.layers.Conv2D):
+        return tfmot.quantization.keras.quantize_annotate_layer(layer)
+
+    if isinstance(layer, tf.keras.layers.MaxPool2D):
+        return tfmot.quantization.keras.quantize_annotate_layer(layer)
+
+    return layer
 
 if __name__ == '__main__':
     # Checkpoint is used to track the training model so it could be restored
@@ -62,6 +73,24 @@ if __name__ == '__main__':
         print("Checkpoint directory created: {}".format(checkpoint_dir))
 
     latest_checkpoint = tf.train.latest_checkpoint(checkpoint_dir)
+
+    # Sometimes the user only want to save the model. Skip training in this case.
+    if args.export_only and args.quantization:
+        if not tf.io.gfile.exists(export_dir):
+            tf.io.gfile.mkdir(export_dir)
+
+        quantize_model = tf.keras.models.clone_model(model,clone_function=apply_quantization_to_dense)
+        model = tfmot.quantization.keras.quantize_apply(quantize_model)
+
+        if latest_checkpoint is None:
+            print("Warning: Model not restored from any checkpoint.")
+        else:
+            model.load_weights(latest_checkpoint)
+            print("Saving model to {} ...".format(export_dir))
+            model.save(export_dir, include_optimizer=False)
+            print("Model saved at: {}".format(export_dir))
+        quit()
+
     if latest_checkpoint:
         print("Checkpoint found: {}, restoring...".format(latest_checkpoint))
         model.load_weights(latest_checkpoint)
@@ -71,17 +100,6 @@ if __name__ == '__main__':
 
     if args.quantization:
         print("Initializing Quantization Aware Training")
-        def apply_quantization_to_dense(layer):
-            if isinstance(layer, tf.keras.layers.Dense):
-                return tfmot.quantization.keras.quantize_annotate_layer(layer)
-
-            if isinstance(layer, tf.keras.layers.Conv2D):
-                return tfmot.quantization.keras.quantize_annotate_layer(layer)
-
-            if isinstance(layer, tf.keras.layers.MaxPool2D):
-                return tfmot.quantization.keras.quantize_annotate_layer(layer)
-
-            return layer
         quantize_model = tf.keras.models.clone_model(model,clone_function=apply_quantization_to_dense)
         model = tfmot.quantization.keras.quantize_apply(quantize_model)
 
