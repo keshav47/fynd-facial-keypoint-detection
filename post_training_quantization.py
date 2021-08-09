@@ -147,12 +147,16 @@ def inference(tflite_model):
   input_index,output_index = interpreter.get_input_details()[0]["index"],interpreter.get_output_details()[0]["index"]
   result_mse = []
   start = time.time()
+  count = 0
   for input_image,output_val in tqdm(dataset_val):
     interpreter.set_tensor(input_index, input_image)
     # Run inference.
     interpreter.invoke()
     output = interpreter.tensor(output_index)
     result_mse.append(mse(np.array(output_val), output()).numpy())
+    count+=1
+    if count==100:
+        break
 
   return sum(result_mse)/len(result_mse),time.time()-start
 
