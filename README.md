@@ -92,7 +92,7 @@ quantized_predict.predict("./test_images/test_2.jpg")
 quantized_predict.predict("./test_images/test_3.jpg")
 ```
 
-### Post Training Quantization and its impact on Latency and Speed
+### Post Training Quantization and its impact on Latency and Accuracy Metrics
 
 Tensorflow's [TfLite converter](https://www.tensorflow.org/model_optimization/guide/quantization/training_example#create_quantized_model_for_tflite_backend) is used to convert '.pb' model to '.tflite'.
 
