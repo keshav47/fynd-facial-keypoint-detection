@@ -19,7 +19,7 @@ if __name__ == "__main__":
     saved_model = "./exported"
     tflite_model = tflite_convert(saved_model)
     
-    open("./optimized/keypoint.tflite", "wb").write(tflite_model)
+    open("./tflite_optimized/keypoint.tflite", "wb").write(tflite_model)
 
 
 
