@@ -47,6 +47,7 @@ if __name__ == '__main__':
     # Checkpoint is used to track the training model so it could be restored
     # later to resume training.
     checkpoint_dir = "checkpoints"
+    quantized_checkpoints_dir = "quantized_checkpoints"
 
     # Besides checkpoint, `saved_model` is another way to save the model for
     # inference or optimization.
@@ -71,11 +72,17 @@ if __name__ == '__main__':
     if not tf.io.gfile.exists(checkpoint_dir):
         tf.io.gfile.mkdir(checkpoint_dir)
         print("Checkpoint directory created: {}".format(checkpoint_dir))
+    
+    # Prepare for training. First restore the model if any checkpoint file available.
+    if not tf.io.gfile.exists(quantized_checkpoints_dir):
+        tf.io.gfile.mkdir(quantized_checkpoints_dir)
+        print("Checkpoint directory created: {}".format(quantized_checkpoints_dir))
 
     latest_checkpoint = tf.train.latest_checkpoint(checkpoint_dir)
 
     # Sometimes the user only want to save the model. Skip training in this case.
     if args.export_only and args.quantization:
+        latest_checkpoint = tf.train.latest_checkpoint(quantized_checkpoints_dir)
         if not tf.io.gfile.exists(export_dir):
             tf.io.gfile.mkdir(export_dir)
 
@@ -102,6 +109,7 @@ if __name__ == '__main__':
         print("Initializing Quantization Aware Training")
         quantize_model = tf.keras.models.clone_model(model,clone_function=apply_quantization_to_dense)
         model = tfmot.quantization.keras.quantize_apply(quantize_model)
+        checkpoint_dir = quantized_checkpoints_dir
 
     # Sometimes the user only want to save the model. Skip training in this case.
     if args.export_only:
