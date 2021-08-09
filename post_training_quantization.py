@@ -1,3 +1,4 @@
+import argparse
 import os
 import time
 import cv2
@@ -7,6 +8,11 @@ import tensorflow as tf
 import fmd
 from fmd.mark_dataset.dataset import MarkDataset
 from dataset import get_parsed_dataset
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--export_model', default='./exported', type=str,
+                    help='Export Model Weights')
+args = parser.parse_args()
 
 def representative_dataset_gen():
     wflw_dir = "./wflw_data/"
@@ -166,40 +172,45 @@ if __name__ == "__main__":
         os.makedirs(export_dir)
 
     # The model to be quantized.
-    saved_model = "./exported"
+    saved_model = args.export_model
     # Dynamic range quantization
     mode = MODE.copy()
     mode.update({"DynamicRangeQuantization": True})
     tflite_model = quantize(saved_model, mode)
+    print("$$$$$$$$$$$$$$$")
     print(f"Mean Square Error for DynamicRangeQuantization is {inference(tflite_model)[0]}, speed of inference {inference(tflite_model)[1]}s")
-
+    print("$$$$$$$$$$$$$$$")
     
     mode = MODE.copy()
     mode.update({"IntegerWithFloatFallback": True})
     tflite_model = quantize(saved_model, mode, representative_dataset_gen)
     open("./tflite_optimized/quant_int_fp_fallback.tflite", "wb").write(tflite_model)
+    print("$$$$$$$$$$$$$$$")
     print(f"Mean Square Error for IntegerWithFloatFallback is {inference(tflite_model)[0]}, speed of inference {inference(tflite_model)[1]}s")
-
+    print("$$$$$$$$$$$$$$$")
 
     mode = MODE.copy()
     mode.update({"IntegerOnly": True})
     tflite_model = quantize(saved_model, mode,  representative_dataset_gen)
     open("./tflite_optimized/quant_int_only.tflite", "wb").write(tflite_model)
+    print("$$$$$$$$$$$$$$$")
     print(f"Mean Square Error for IntegerOnly is {inference(tflite_model)[0]}, speed of inference {inference(tflite_model)[1]}s")
-    
+    print("$$$$$$$$$$$$$$$")
 
     # Float16 quantization
     mode = MODE.copy()
     mode.update({"FP16": True})
     tflite_model = quantize(saved_model, mode)
     open("./tflite_optimized/quant_fp16.tflite", "wb").write(tflite_model)
+    print("$$$$$$$$$$$$$$$")
     print(f"Mean Square Error for FP16 is {inference(tflite_model)[0]}, speed of inference {inference(tflite_model)[1]}s")
-    
+    print("$$$$$$$$$$$$$$$")
 
     # 16x8 quantization
     mode = MODE.copy()
     mode.update({"16x8": True})
     tflite_model = quantize(saved_model, mode)
     open("./tflite_optimized/quant_16x8.tflite", "wb").write(tflite_model)
+    print("$$$$$$$$$$$$$$$")
     print(f"Mean Square Error for 16x8 is {inference(tflite_model)[0]}, speed of inference {inference(tflite_model)[1]}s")
-    
+    print("$$$$$$$$$$$$$$$")
