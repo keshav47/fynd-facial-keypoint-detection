@@ -1,14 +1,11 @@
 
-# cnn-facial-landmark
+# fynd-facial-keypoint-detection
 
-Facial landmarks detection based on convolution neural network.
+Facial Keypoint detection, trained with Simple CNN with Quantization Aware Training.
 
-Here is a sample gif showing the detection result.
+Here is a sample png showing the detection result.
 
 ![](doc/demo01.gif)
-
-
-The model is build with TensorFlow, and training code is provided so you can train your own model with your own datasets. The companion tutorial is also [available](https://yinguobing.com/facial-landmark-localization-by-deep-learning-background/), which includes background, dataset, preprocessing, model architecture, training and deployment. I tried my best to make them simple and easy to understand for beginners. Feel free to open issues when you are stuck or have some wonderful ideas to share.
 
 
 ## Getting Started
@@ -16,10 +13,9 @@ The model is build with TensorFlow, and training code is provided so you can tra
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
+Check out the quickstart notebook on colab for setting up environment, training and inferencing.
 
-![TensorFlow](https://img.shields.io/badge/TensorFlow-v2.3-brightgreen)
-![OpenCV](https://img.shields.io/badge/OpenCV-v4.3-brightgreen)
-![Numpy](https://img.shields.io/badge/Numpy-v1.17-brightgreen)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1GYu-SvQYqhCd2CWj64J6kDuMV9_xep27?usp=sharing]
 
 ### Installing
 
