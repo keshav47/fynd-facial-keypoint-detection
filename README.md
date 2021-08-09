@@ -23,8 +23,19 @@ Just git clone this repo and you are good to go.
 
 ```bash
 # From your favorite development directory
-git clone https://github.com/yinguobing/cnn-facial-landmark.git
+git clone https://github.com/keshav47/cnn-facial-landmark.git
 ```
+
+## Prparing Dataset
+Used WFLW Facial Keypint Dataset
+
+| Name        | Author                                                                                                         | Published | #Marks | #Samples |
+| ----------- | -------------------------------------------------------------------------------------------------------------- | --------- | ------ | -------- |
+| WFLW        | [Tsinghua National Laboratory](https://wywu.github.io/projects/LAB/WFLW.html)                                  | 2018      | 98     | 10000    |
+
+Download the following files and place it inside the `./wflw_data` folder:
+[WFLW_annotations.tar.gz](https://drive.google.com/file/d/1-1NqSgYx55cZCUYWGDDiiTGeT6_BN57S/view?usp=sharing)
+[WFLW_images.tar.gz](https://drive.google.com/file/d/1-1UlzCvhCYOr1bpIWZ9YeQExKN-igXgS/view?usp=sharing)
 
 ## Train & evaluate
 
@@ -38,12 +49,7 @@ python3 landmark.py \
     --batch_size=32 \
     --epochs=10
 ```
-Training and testing files are required to be stored as TensorFlow Record files. You can generate them by yourself, or checkout the branch `features/tfrecord-marks-68` in this repository: [face-mesh-generator](https://github.com/yinguobing/face-mesh-generator).
 
-```bash
-git clone https://github.com/yinguobing/face-mesh-generator.git
-git checkout features/tfrecord-marks-68
-```
 
 ## Export
 
