@@ -76,3 +76,9 @@ python3 landmark.py --export_only=True
 ### TfLite Conversion
 
 Tensorflow's [TfLite converter](https://www.tensorflow.org/model_optimization/guide/quantization/training_example#create_quantized_model_for_tflite_backend) is used to convert '.pb' model to '.tflite'.
+
+
+```bash
+# From the repo's root directory, will pick up saved '.pb' weights in exported folder and convert to '.tflite' and save it in tflite_optimized folder
+python tflite_convert.py
+```
